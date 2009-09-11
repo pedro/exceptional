@@ -19,7 +19,7 @@ module Exceptional
     def setup_config(environment, config_file)
       begin
         config = YAML::load(File.open(config_file))[environment]
-        @api_key = config['api-key'] unless config['api-key'].nil?
+        @api_key = ENV['EXCEPTIONAL_API_KEY'] || config['api-key']
         @ssl_enabled = config['ssl'] unless config['ssl'].nil?
         @log_level = config['log-level'] unless config['log-level'].nil?
         @enabled = config['enabled'] unless config['enabled'].nil?
